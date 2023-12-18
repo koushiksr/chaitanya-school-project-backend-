@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const loginRoute_1 = require("./loginRoute");
+const express = require('express');
+const router = express.Router();
+const schoolController = require('../controllers/schoolController');
+const studentController = require('../controllers/studentController');
+router.get('/admin/:id', loginRoute_1.verifySchool, schoolController.getSchoolAdmin);
+router.post('/student/create', loginRoute_1.verifySchool, studentController.create);
+router.get('/student/:schoolID', loginRoute_1.verifySchoolOrStudent, studentController.getAllStudent);
+router.get('/student/:schoolID/:candidateClass?/:gender?', loginRoute_1.verifySchoolOrStudent, studentController.getAllStudentByClassGender);
+router.put('/student/edit/:id', loginRoute_1.verifySchool, studentController.editStudent);
+router.delete('/student/delete/:id', loginRoute_1.verifySchool, studentController.deleteStudent);
+exports.default = router;

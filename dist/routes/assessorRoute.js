@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express = require('express');
+const router = express.Router();
+const adminController = require('../controllers/adminController');
+const schoolController = require('../controllers/schoolController');
+const assessorController = require('../controllers/assessorController');
+const loginRoute_1 = require("./loginRoute");
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage }).single('file');
+router.get('/schools', loginRoute_1.verifyAssessor, assessorController.getAllSchools);
+router.get('/students', loginRoute_1.verifyAssessor, assessorController.getAllStudents);
+router.post('/students/assesment/:email/:name', loginRoute_1.verifyAssessor, upload, assessorController.sendPdfToStudent);
+exports.default = router;
