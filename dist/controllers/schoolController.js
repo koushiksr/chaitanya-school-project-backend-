@@ -7,7 +7,7 @@ const loginModel_1 = __importDefault(require("../models/loginModel"));
 const schoolModel_1 = __importDefault(require("../models/schoolModel"));
 const nodemailer = require("nodemailer");
 const Mailgen = require('mailgen');
-exports.getSchoolAdmin = async (req, res) => {
+module.exports.getSchoolAdmin = async (req, res) => {
     try {
         const email = req.params.id;
         const admin_login = await loginModel_1.default.findOne({ email });
@@ -18,7 +18,7 @@ exports.getSchoolAdmin = async (req, res) => {
         console.error(error);
     }
 };
-exports.create = async (req, res) => {
+module.exports.create = async (req, res) => {
     try {
         let isMailSend = false;
         const { schoolEmail, schoolName, } = req.body;
@@ -134,7 +134,7 @@ exports.create = async (req, res) => {
         console.error(error);
     }
 };
-exports.getAllSchool = async (req, res) => {
+module.exports.getAllSchool = async (req, res) => {
     try {
         const school = await schoolModel_1.default.find();
         if (!school) {
@@ -146,7 +146,7 @@ exports.getAllSchool = async (req, res) => {
         console.error(error);
     }
 };
-exports.editSchool = async (req, res) => {
+module.exports.editSchool = async (req, res) => {
     try {
         const { schoolName, schoolID, contactName, contactNo, schoolEmail, schoolType, principalName, principalContact, principalEmail, classesFrom, classesTo, totalStudents, noOfBoys, noOfGirls, } = req.body;
         const result = await schoolModel_1.default.updateOne({ _id: Object(req.params.id) }, {
@@ -194,7 +194,7 @@ exports.editSchool = async (req, res) => {
         console.error(error);
     }
 };
-exports.deleteSchool = async (req, res) => {
+module.exports.deleteSchool = async (req, res) => {
     try {
         const result = await schoolModel_1.default.deleteOne({ _id: Object(req.params.id) });
         if (result.deletedCount === 1) {

@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const adminModel_1 = __importDefault(require("../models/adminModel"));
-exports.getAdmin = async (req, res) => {
+module.exports.getAdmin = async (req, res) => {
     try {
         const result = await adminModel_1.default.find();
         return res.send(result);

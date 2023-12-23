@@ -7,7 +7,7 @@ const activityModel_1 = __importDefault(require("../models/activityModel"));
 const studentModel_1 = __importDefault(require("../models/studentModel"));
 const mailgen_1 = __importDefault(require("mailgen"));
 const nodemailer_1 = __importDefault(require("nodemailer"));
-exports.create = async (req, res) => {
+module.exports.create = async (req, res) => {
     try {
         let isMailSend = false;
         const { formData, schoolID, candidateID } = req.body;
@@ -117,7 +117,7 @@ exports.create = async (req, res) => {
         console.error(error);
     }
 };
-exports.createbyAssesser = async (req, res) => {
+module.exports.createbyAssesser = async (req, res) => {
     try {
         let isMailSend = false;
         const { formData, schoolID, candidateID } = req.body;
@@ -237,7 +237,7 @@ exports.createbyAssesser = async (req, res) => {
         console.error(error);
     }
 };
-exports.getAllforAssessor = async (req, res) => {
+module.exports.getAllforAssessor = async (req, res) => {
     try {
         const { schoolID, candidateID } = req.params;
         const matchData = {
@@ -253,7 +253,7 @@ exports.getAllforAssessor = async (req, res) => {
         console.error(error);
     }
 };
-exports.getAll = async (req, res) => {
+module.exports.getAll = async (req, res) => {
     try {
         const student = await activityModel_1.default.find({ SchoolID: req.params.schoolID, ID: req.params.candidateID });
         if (!student) {
@@ -265,7 +265,7 @@ exports.getAll = async (req, res) => {
         console.error(error);
     }
 };
-exports.getAllActivityBySchoolID = async (req, res) => {
+module.exports.getAllActivityBySchoolID = async (req, res) => {
     try {
         console.log(req.params);
         const activity = req.params.activity;
@@ -302,7 +302,7 @@ exports.getAllActivityBySchoolID = async (req, res) => {
         console.error(error);
     }
 };
-exports.getLast4ActivityBycandidateID = async (req, res) => {
+module.exports.getLast4ActivityBycandidateID = async (req, res) => {
     try {
         const activity = req.params.activity;
         const candidateID = req.params.candidateID;
@@ -328,7 +328,7 @@ exports.getLast4ActivityBycandidateID = async (req, res) => {
         res.status(404).send({ message: ' something went wrong' });
     }
 };
-exports.edit = async (req, res) => {
+module.exports.edit = async (req, res) => {
     try {
         if (req.body.BMI) {
             req.body.ongoing = false;
@@ -348,7 +348,7 @@ exports.edit = async (req, res) => {
         console.error(error);
     }
 };
-exports.delete = async (req, res) => {
+module.exports.delete = async (req, res) => {
     try {
         if (req.params.id !== 'undefined') {
             const result = await activityModel_1.default.deleteOne({ _id: Object(req.params.id) });

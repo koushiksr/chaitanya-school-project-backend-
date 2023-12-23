@@ -7,7 +7,7 @@ const loginModel_1 = __importDefault(require("../models/loginModel"));
 const studentModel_1 = __importDefault(require("../models/studentModel"));
 const nodemailer = require("nodemailer");
 const Mailgen = require('mailgen');
-exports.getStudentAdmin = async (req, res) => {
+module.exports.getStudentAdmin = async (req, res) => {
     try {
         const result = await studentModel_1.default.find({ email: req.params.id });
         return res.send(result);
@@ -16,7 +16,7 @@ exports.getStudentAdmin = async (req, res) => {
         console.error(error);
     }
 };
-exports.create = async (req, res) => {
+module.exports.create = async (req, res) => {
     try {
         const { candidateName, email } = req.body;
         const student = await studentModel_1.default.findOne({ email: email });
@@ -175,7 +175,7 @@ exports.create = async (req, res) => {
         console.error(error);
     }
 };
-exports.getAllStudent = async (req, res) => {
+module.exports.getAllStudent = async (req, res) => {
     try {
         const student = await studentModel_1.default.find({ schoolID: req.params.schoolID });
         if (!student) {
@@ -187,7 +187,7 @@ exports.getAllStudent = async (req, res) => {
         console.error(error);
     }
 };
-exports.getAllStudentByClassGender = async (req, res) => {
+module.exports.getAllStudentByClassGender = async (req, res) => {
     try {
         const { schoolID, candidateClass, gender } = req.params;
         const matchData = {
@@ -204,7 +204,7 @@ exports.getAllStudentByClassGender = async (req, res) => {
         console.error(error);
     }
 };
-exports.editStudent = async (req, res) => {
+module.exports.editStudent = async (req, res) => {
     try {
         const { candidateName, candidateID, gender, dob, age, class: candidateClass, dominantSide, parentName, parentMobileNo, alternateNo, email, residenceArea, residenceCity, } = req.body;
         const result = await studentModel_1.default.updateOne({ _id: Object(req.params.id) }, {
@@ -236,7 +236,7 @@ exports.editStudent = async (req, res) => {
         console.error(error);
     }
 };
-exports.deleteStudent = async (req, res) => {
+module.exports.deleteStudent = async (req, res) => {
     try {
         const result1 = await studentModel_1.default.deleteOne({ email: req.params.id });
         const result2 = await loginModel_1.default.deleteOne({ email: req.params.id, role: 'student' });
