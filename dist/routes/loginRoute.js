@@ -216,7 +216,6 @@ const verifyStudent = (req, res, next) => {
     const bearerHeader = req.headers.authorization;
     if (typeof bearerHeader !== 'undefined') {
         const token = bearerHeader.split(' ')[1];
-        // console.log(token, ' toennn')
         jwt.verify(token, secretKey, (err, decoded) => {
             if (err) {
                 res.status(403).json({ result: 'Invalid token' });
