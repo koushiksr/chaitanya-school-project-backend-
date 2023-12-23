@@ -5,7 +5,7 @@ import nodemailer from "nodemailer";
 
 
 
-exports.create = async (req: any, res: any) => {
+module.exports.create = async (req: any, res: any) => {
      try {
           let isMailSend = false;
           const { formData, schoolID, candidateID } = req.body;
@@ -119,7 +119,7 @@ exports.create = async (req: any, res: any) => {
           console.error(error)
      }
 }
-exports.createbyAssesser = async (req: any, res: any) => {
+module.exports.createbyAssesser = async (req: any, res: any) => {
      try {
           let isMailSend = false;
           const { formData, schoolID, candidateID } = req.body;
@@ -245,7 +245,7 @@ exports.createbyAssesser = async (req: any, res: any) => {
      }
 }
 
-exports.getAllforAssessor = async (req: any, res: any) => {
+module.exports.getAllforAssessor = async (req: any, res: any) => {
      try {
           const { schoolID, candidateID } = req.params
           const matchData: any = {
@@ -262,7 +262,7 @@ exports.getAllforAssessor = async (req: any, res: any) => {
      }
 }
 
-exports.getAll = async (req: any, res: any) => {
+module.exports.getAll = async (req: any, res: any) => {
      try {
           const student = await Activity.find({ SchoolID: req.params.schoolID, ID: req.params.candidateID })
           if (!student) {
@@ -273,7 +273,7 @@ exports.getAll = async (req: any, res: any) => {
           console.error(error)
      }
 }
-exports.getAllActivityBySchoolID = async (req: any, res: any) => {
+module.exports.getAllActivityBySchoolID = async (req: any, res: any) => {
      try {
           console.log(req.params);
           const activity = req.params.activity;
@@ -306,7 +306,7 @@ exports.getAllActivityBySchoolID = async (req: any, res: any) => {
           console.error(error)
      }
 }
-exports.getLast4ActivityBycandidateID = async (req: any, res: any) => {
+module.exports.getLast4ActivityBycandidateID = async (req: any, res: any) => {
      try {
           const activity = req.params.activity;
           const candidateID = req.params.candidateID;
@@ -332,7 +332,7 @@ exports.getLast4ActivityBycandidateID = async (req: any, res: any) => {
      }
 }
 
-exports.edit = async (req: any, res: any) => {
+module.exports.edit = async (req: any, res: any) => {
      try {
           if (req.body.BMI) {
                req.body.ongoing = false
@@ -354,7 +354,7 @@ exports.edit = async (req: any, res: any) => {
      }
 };
 
-exports.delete = async (req: any, res: any) => {
+module.exports.delete = async (req: any, res: any) => {
      try {
           if (req.params.id !== 'undefined') {
                const result = await Activity.deleteOne({ _id: Object(req.params.id) });

@@ -5,7 +5,7 @@ const Mailgen = require('mailgen');
 
 
 
-exports.getStudentAdmin = async (req: any, res: any) => {
+module.exports.getStudentAdmin = async (req: any, res: any) => {
      try {
           const result = await Student.find({ email: req.params.id })
           return res.send(result)
@@ -13,7 +13,7 @@ exports.getStudentAdmin = async (req: any, res: any) => {
           console.error(error)
      }
 }
-exports.create = async (req: any, res: any) => {
+module.exports.create = async (req: any, res: any) => {
      try {
           const { candidateName, email } = req.body;
           const student = await Student.findOne({ email: email })
@@ -175,7 +175,7 @@ exports.create = async (req: any, res: any) => {
 
 }
 
-exports.getAllStudent = async (req: any, res: any) => {
+module.exports.getAllStudent = async (req: any, res: any) => {
      try {
           const student = await Student.find({ schoolID: req.params.schoolID })
           if (!student) {
@@ -186,7 +186,7 @@ exports.getAllStudent = async (req: any, res: any) => {
           console.error(error)
      }
 }
-exports.getAllStudentByClassGender = async (req: any, res: any) => {
+module.exports.getAllStudentByClassGender = async (req: any, res: any) => {
      try {
           const { schoolID, candidateClass, gender } = req.params
           const matchData: any = {
@@ -204,7 +204,7 @@ exports.getAllStudentByClassGender = async (req: any, res: any) => {
      }
 }
 
-exports.editStudent = async (req: any, res: any) => {
+module.exports.editStudent = async (req: any, res: any) => {
      try {
           const {
                candidateName,
@@ -253,7 +253,7 @@ exports.editStudent = async (req: any, res: any) => {
      }
 }
 
-exports.deleteStudent = async (req: any, res: any) => {
+module.exports.deleteStudent = async (req: any, res: any) => {
      try {
           const result1 = await Student.deleteOne({ email: req.params.id })
           const result2 = await Login.deleteOne({ email: req.params.id, role: 'student' })

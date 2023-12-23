@@ -97,6 +97,7 @@ export const verifyOTP = (req: any, res: any) => {
     res.status(404).send(false)
   }
 }
+
 export const resetPassword = async (req: any, res: any) => {
   try {
     const updatedLogin = await Login.findOneAndUpdate(
@@ -116,10 +117,12 @@ export const resetPassword = async (req: any, res: any) => {
     console.error('Error resetting password:', error);
   }
 }
+
+
+
 router.get('/forgotpassword/:email', verifyEmail);
 router.get('/forgotpassword/OTP/:otp', verifyOTP);
 router.put('/forgotpassword/resetpassword/:email/:newPassword', resetPassword);
-
 export const verifyAdmin = (req: { headers: { [x: string]: any; }; decoded: any; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { result: string; }): void; new(): any; }; }; }, next: () => void) => {
   const bearerHeader = req.headers.authorization;
   if (typeof bearerHeader !== 'undefined') {
@@ -142,6 +145,7 @@ export const verifyAdmin = (req: { headers: { [x: string]: any; }; decoded: any;
     res.status(401).json({ result: 'Token is missing' });
   }
 };
+
 export const verifyAssessor = (req: { headers: { [x: string]: any; }; decoded: any; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { result: string; }): void; new(): any; }; }; }, next: () => void) => {
   const bearerHeader = req.headers.authorization;
   if (typeof bearerHeader !== 'undefined') {
@@ -187,6 +191,7 @@ export const verifySchool = (req: { headers: { [x: string]: any; }; decoded: any
     res.status(401).json({ result: 'Token is missing' });
   }
 };
+
 export const verifySchoolOrStudent = (req: { headers: { [x: string]: any; }; decoded: any; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { result: string; }): void; new(): any; }; }; }, next: () => void) => {
   const bearerHeader = req.headers.authorization;
   if (typeof bearerHeader !== 'undefined') {
@@ -209,11 +214,11 @@ export const verifySchoolOrStudent = (req: { headers: { [x: string]: any; }; dec
     res.status(401).json({ result: 'Token is missing' });
   }
 };
+
 export const verifyStudent = (req: { headers: { [x: string]: any; }; decoded: any; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { result: string; }): void; new(): any; }; }; }, next: () => void) => {
   const bearerHeader = req.headers.authorization;
   if (typeof bearerHeader !== 'undefined') {
     const token = bearerHeader.split(' ')[1];
-    // console.log(token, ' toennn')
 
     jwt.verify(token, secretKey, (err: any, decoded: any) => {
       if (err) {
@@ -227,6 +232,7 @@ export const verifyStudent = (req: { headers: { [x: string]: any; }; decoded: an
     res.status(401).json({ result: 'Token is missing' });
   }
 };
+
 
 router.post('/', async (req: { body: { email: any; password: any; }; }, res: { json: (arg0: { token: any; role: any; }) => void; status: (arg0: number) => { (): any; new(): any; json: { (arg0: { result?: string; error?: string; }): void; new(): any; }; }; }) => {
   const { email, password } = req.body;

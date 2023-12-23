@@ -7,7 +7,7 @@ const Mailgen = require('mailgen');
 const fs = require('fs');
 const path = require('path');
 
-exports.create = async (req: any, res: any) => {
+module.exports.create = async (req: any, res: any) => {
      try {
           let isMailSend = false;
           const { email, name, } = req.body;
@@ -117,7 +117,7 @@ exports.create = async (req: any, res: any) => {
           console.error(error)
      }
 }
-exports.sendPdfToStudent = async (req: any, res: any) => {
+module.exports.sendPdfToStudent = async (req: any, res: any) => {
      try {
           const email = req.params.email
           let pdfData: any
@@ -205,7 +205,7 @@ exports.sendPdfToStudent = async (req: any, res: any) => {
      }
 }
 
-exports.getAll = async (req: any, res: any) => {
+module.exports.getAll = async (req: any, res: any) => {
      try {
           const school = await Assessor.find();
           if (!school) {
@@ -216,7 +216,7 @@ exports.getAll = async (req: any, res: any) => {
           console.error(error)
      }
 }
-exports.getAllSchools = async (req: any, res: any) => {
+module.exports.getAllSchools = async (req: any, res: any) => {
      try {
           const school = await School.find();
           if (!school) {
@@ -232,7 +232,7 @@ exports.getAllSchools = async (req: any, res: any) => {
           res.status(500).json({ message: 'Internal Server Error' });
      }
 }
-exports.getAllStudents = async (req: any, res: any) => {
+module.exports.getAllStudents = async (req: any, res: any) => {
      try {
           const school = await Student.find();
           if (!school) {
@@ -244,7 +244,7 @@ exports.getAllStudents = async (req: any, res: any) => {
      }
 }
 
-exports.edit = async (req: any, res: any) => {
+module.exports.edit = async (req: any, res: any) => {
      try {
           const {
                name,
@@ -288,7 +288,7 @@ exports.edit = async (req: any, res: any) => {
      }
 };
 
-exports.delete = async (req: any, res: any) => {
+module.exports.delete = async (req: any, res: any) => {
      try {
           const result = await Assessor.deleteOne({ _id: Object(req.params.id) });
           if (result.deletedCount === 1) {

@@ -5,7 +5,7 @@ const Mailgen = require('mailgen');
 
 
 
-exports.getSchoolAdmin = async (req: any, res: any) => {
+module.exports.getSchoolAdmin = async (req: any, res: any) => {
      try {
           const email = req.params.id;
           const admin_login = await Login.findOne({ email });
@@ -16,7 +16,7 @@ exports.getSchoolAdmin = async (req: any, res: any) => {
      }
 }
 
-exports.create = async (req: any, res: any) => {
+module.exports.create = async (req: any, res: any) => {
      try {
           let isMailSend = false;
           const { schoolEmail, schoolName, } = req.body;
@@ -139,7 +139,7 @@ exports.create = async (req: any, res: any) => {
 }
 
 
-exports.getAllSchool = async (req: any, res: any) => {
+module.exports.getAllSchool = async (req: any, res: any) => {
      try {
           const school = await School.find();
           if (!school) {
@@ -151,7 +151,7 @@ exports.getAllSchool = async (req: any, res: any) => {
      }
 }
 
-exports.editSchool = async (req: any, res: any) => {
+module.exports.editSchool = async (req: any, res: any) => {
      try {
           const {
                schoolName,
@@ -216,8 +216,8 @@ exports.editSchool = async (req: any, res: any) => {
      }
 };
 
-exports.deleteSchool = async (req: any, res: any) => {
-     try {  
+module.exports.deleteSchool = async (req: any, res: any) => {
+     try {
           const result = await School.deleteOne({ _id: Object(req.params.id) });
           if (result.deletedCount === 1) {
                console.log('Document deleted successfully');
@@ -226,6 +226,6 @@ exports.deleteSchool = async (req: any, res: any) => {
                console.log('Document not found or not deleted');
           }
      } catch (error) {
-          console.error(error) 
+          console.error(error)
      }
 }
