@@ -1,3 +1,4 @@
+import * as process from 'process';
 import Activity from "../models/activityModel";
 import Student from "../models/studentModel";
 import Mailgen from 'mailgen';

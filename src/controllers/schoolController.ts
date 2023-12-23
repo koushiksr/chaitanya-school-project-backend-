@@ -1,3 +1,4 @@
+import * as process from 'process';
 import Login from "../models/loginModel";
 import School from "../models/schoolModel";
 const nodemailer = require("nodemailer");

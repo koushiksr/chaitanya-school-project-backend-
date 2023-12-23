@@ -1,3 +1,4 @@
+import * as process from 'process';
 import Login from "../models/loginModel";
 import Assessor from "../models/assessorModel";
 import Student from "../models/studentModel";
